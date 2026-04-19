@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RCM Solutions Group — Physician-Led Revenue Cycle Advisory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #1a2f52;
+  --blue:    #2c5fa3;
+  --accent:  #1e8c9e;
+  --light:   #edf3fb;
+  --lighter: #f7fafd;
+  --text:    #1c2b3a;
+  --muted:   #5a6e84;
+  --border:  #d0dce8;
+  --white:   #ffffff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--white);
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* ── TYPOGRAPHY ── */
+h1,h2,h3,h4 { font-family: 'Cormorant Garamond', serif; line-height: 1.2; }
+h1 { font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 600; }
+h2 { font-size: clamp(1.9rem, 3.5vw, 2.6rem); font-weight: 600; }
+h3 { font-size: 1.3rem; font-weight: 600; }
+
+/* ── LAYOUT ── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+section { padding: 90px 0; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(26,47,82,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 12px; text-decoration: none;
+}
+.nav-logo-mark {
+  width: 38px; height: 38px; background: var(--blue);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 1rem; color: white; letter-spacing: 0.02em;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.15);
+}
+.nav-logo-text {
+  font-family: 'DM Sans', sans-serif; font-weight: 600;
+  font-size: 0.95rem; color: white; letter-spacing: 0.01em;
+}
+.nav-logo-sub {
+  font-size: 0.7rem; color: rgba(255,255,255,0.55);
+  font-weight: 300; letter-spacing: 0.04em; text-transform: uppercase;
+  display: block; margin-top: -2px;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: rgba(255,255,255,0.75); text-decoration: none;
+  font-size: 0.875rem; font-weight: 500; letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: white; }
+.nav-cta {
+  background: var(--accent); color: white !important;
+  padding: 8px 20px; border-radius: 4px; font-weight: 500 !important;
+}
+.nav-cta:hover { background: #187b8c !important; }
+
+/* ── HERO ── */
+#hero {
+  padding: 160px 0 100px;
+  background:
+    linear-gradient(160deg, #0f1e38 0%, #1a3461 55%, #1e4a7a 100%);
+  position: relative; overflow: hidden;
+}
+#hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-inner { position: relative; max-width: 760px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 100px; padding: 6px 16px; margin-bottom: 28px;
+  font-size: 0.78rem; color: rgba(255,255,255,0.8);
+  letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px; background: #4fc3d4;
+  border-radius: 50%; animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.5; transform:scale(1.3); }
+}
+#hero h1 { color: white; margin-bottom: 24px; }
+#hero h1 span { color: #7ec8d8; }
+.hero-desc {
+  font-size: 1.1rem; color: rgba(255,255,255,0.72);
+  max-width: 580px; margin-bottom: 44px; font-weight: 300; line-height: 1.8;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px; border-radius: 4px; font-weight: 500;
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+  text-decoration: none; transition: all 0.2s; cursor: pointer;
+  letter-spacing: 0.01em; border: none;
+}
+.btn-primary { background: var(--accent); color: white; }
+.btn-primary:hover { background: #187b8c; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(30,140,158,0.35); }
+.btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.35); }
+.btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.6); }
+
+.hero-stats {
+  display: flex; gap: 48px; margin-top: 60px;
+  padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);
+  flex-wrap: wrap;
+}
+.stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem; font-weight: 700; color: #7ec8d8; line-height: 1;
+}
+.stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-top: 4px; letter-spacing: 0.03em; }
+
+/* ── PROBLEM ── */
+#problem { background: var(--lighter); }
+.problem-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 48px; align-items: center;
+}
+.problem-text h2 { color: var(--navy); margin-bottom: 20px; }
+.problem-text p { color: var(--muted); font-size: 1.05rem; margin-bottom: 16px; }
+.problem-cards { display: flex; flex-direction: column; gap: 16px; }
+.problem-card {
+  background: white; border-radius: 8px;
+  border-left: 4px solid var(--blue);
+  padding: 20px 24px;
+  box-shadow: 0 2px 12px rgba(26,47,82,0.07);
+}
+.problem-card-label {
+  font-size: 0.72rem; color: var(--accent); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px;
+}
+.problem-card p { color: var(--text); font-size: 0.95rem; margin: 0; }
+
+/* ── SERVICES ── */
+#services { background: white; }
+.section-label {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+}
+.section-title { color: var(--navy); margin-bottom: 12px; }
+.section-sub { color: var(--muted); font-size: 1.05rem; max-width: 540px; margin-bottom: 56px; }
+.services-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 28px;
+}
+.service-card {
+  background: var(--lighter); border-radius: 10px;
+  padding: 36px 28px; position: relative; overflow: hidden;
+  border: 1px solid var(--border); transition: all 0.25s;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(26,47,82,0.12);
+  border-color: var(--blue);
+}
+.service-card.featured {
+  background: var(--navy); border-color: var(--navy);
+}
+.service-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem; font-weight: 700;
+  color: rgba(44,95,163,0.12); position: absolute;
+  top: 16px; right: 20px; line-height: 1;
+}
+.service-card.featured .service-num { color: rgba(255,255,255,0.08); }
+.service-icon {
+  width: 48px; height: 48px; background: var(--blue);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; font-size: 1.4rem;
+}
+.service-card.featured .service-icon { background: var(--accent); }
+.service-card h3 { color: var(--navy); margin-bottom: 12px; font-size: 1.2rem; }
+.service-card.featured h3 { color: white; }
+.service-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.65; }
+.service-card.featured p { color: rgba(255,255,255,0.65); }
+.service-tag {
+  display: inline-block; margin-top: 20px;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--accent);
+  background: rgba(30,140,158,0.1); border-radius: 100px;
+  padding: 4px 12px;
+}
+.service-card.featured .service-tag { background: rgba(255,255,255,0.12); color: #7ec8d8; }
+
+/* ── HOW IT WORKS ── */
+#how { background: var(--navy); }
+#how .section-label { color: #7ec8d8; }
+#how .section-title { color: white; }
+#how .section-sub { color: rgba(255,255,255,0.6); }
+.steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+.step { position: relative; }
+.step-connector {
+  display: none;
+}
+.step-num {
+  width: 52px; height: 52px;
+  border: 2px solid rgba(126,200,216,0.4);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 700; color: #7ec8d8;
+  margin-bottom: 20px;
+}
+.step h3 { color: white; font-size: 1.05rem; margin-bottom: 10px; }
+.step p  { color: rgba(255,255,255,0.55); font-size: 0.88rem; line-height: 1.65; }
+.steps-line {
+  display: flex; align-items: flex-start;
+  position: relative; gap: 0;
+}
+.steps-line::before {
+  content: '';
+  position: absolute; top: 26px; left: 52px; right: 52px;
+  height: 1px; background: rgba(126,200,216,0.2);
+}
+
+/* ── PRICING ── */
+#pricing { background: var(--lighter); }
+.pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.pricing-card {
+  background: white; border-radius: 10px;
+  border: 1px solid var(--border); padding: 36px 28px;
+  transition: all 0.25s;
+}
+.pricing-card:hover { box-shadow: 0 12px 36px rgba(26,47,82,0.1); }
+.pricing-card.popular {
+  background: var(--navy); border-color: var(--navy);
+  position: relative;
+}
+.popular-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: white;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 4px 16px; border-radius: 100px;
+  white-space: nowrap;
+}
+.pricing-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 600; color: var(--navy); margin-bottom: 8px;
+}
+.pricing-card.popular .pricing-name { color: white; }
+.pricing-price {
+  margin: 16px 0; padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.pricing-card.popular .pricing-price { border-color: rgba(255,255,255,0.12); }
+.price-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem; font-weight: 700; color: var(--blue); line-height: 1;
+}
+.pricing-card.popular .price-amount { color: #7ec8d8; }
+.price-note { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+.pricing-card.popular .price-note { color: rgba(255,255,255,0.5); }
+.pricing-features { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+.pricing-features li {
+  font-size: 0.88rem; color: var(--muted);
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.pricing-card.popular .pricing-features li { color: rgba(255,255,255,0.65); }
+.pricing-features li::before {
+  content: '✓'; color: var(--accent); font-weight: 700;
+  flex-shrink: 0; margin-top: 1px;
+}
+.pricing-card.popular .pricing-features li::before { color: #7ec8d8; }
+
+/* ── ABOUT ── */
+#about { background: white; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.about-text h2 { color: var(--navy); margin-bottom: 20px; }
+.about-text p { color: var(--muted); font-size: 1rem; margin-bottom: 16px; line-height: 1.8; }
+.cred-list { list-style: none; margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+.cred-list li {
+  display: flex; align-items: flex-start; gap: 14px;
+  font-size: 0.92rem; color: var(--text);
+}
+.cred-icon {
+  width: 32px; height: 32px; background: var(--light);
+  border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 0.9rem;
+}
+.about-visual {
+  background: linear-gradient(135deg, var(--navy) 0%, #1e4a7a 100%);
+  border-radius: 12px; padding: 40px 36px;
+  color: white;
+}
+.about-visual-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 600; color: #7ec8d8; margin-bottom: 28px;
+}
+.metric { display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.metric:last-child { border: none; }
+.metric-label { font-size: 0.88rem; color: rgba(255,255,255,0.6); }
+.metric-value { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 700; color: white; }
+.metric-tag { font-size: 0.72rem; background: rgba(30,140,158,0.25);
+  color: #7ec8d8; padding: 3px 10px; border-radius: 100px; font-weight: 600; }
+
+/* ── CONTACT ── */
+#contact { background: var(--lighter); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }
+.contact-info h2 { color: var(--navy); margin-bottom: 16px; }
+.contact-info p { color: var(--muted); font-size: 1rem; margin-bottom: 32px; line-height: 1.8; }
+.contact-detail {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px; font-size: 0.92rem; color: var(--text);
+}
+.contact-detail-icon {
+  width: 36px; height: 36px; background: var(--blue);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: white; flex-shrink: 0;
+}
+.contact-detail a { color: var(--blue); text-decoration: none; }
+.contact-detail a:hover { text-decoration: underline; }
+
+.contact-form {
+  background: white; border-radius: 10px;
+  border: 1px solid var(--border); padding: 40px 36px;
+}
+.contact-form h3 { color: var(--navy); margin-bottom: 28px; font-size: 1.4rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field { margin-bottom: 20px; }
+.field label {
+  display: block; font-size: 0.82rem; font-weight: 600;
+  color: var(--navy); margin-bottom: 6px; letter-spacing: 0.02em;
+}
+.field input, .field select, .field textarea {
+  width: 100%; padding: 11px 14px; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--lighter);
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text);
+  transition: border-color 0.2s, box-shadow 0.2s; outline: none;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--blue); box-shadow: 0 0 0 3px rgba(44,95,163,0.1);
+}
+.field textarea { resize: vertical; min-height: 110px; }
+.form-submit {
+  width: 100%; padding: 14px;
+  background: var(--navy); color: white;
+  border: none; border-radius: 6px; font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem; font-weight: 600; cursor: pointer;
+  transition: background 0.2s;
+}
+.form-submit:hover { background: var(--blue); }
+.form-note { font-size: 0.78rem; color: var(--muted); text-align: center; margin-top: 12px; }
+
+/* ── FOOTER ── */
+footer {
+  background: #0f1e38;
+  padding: 40px 0 28px; text-align: center;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 700; color: white; margin-bottom: 8px;
+}
+.footer-sub { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 24px; }
+.footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; }
+.footer-links a { font-size: 0.82rem; color: rgba(255,255,255,0.5); text-decoration: none; }
+.footer-links a:hover { color: rgba(255,255,255,0.85); }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  .problem-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  .services-grid, .pricing-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .steps-line::before { display: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hero-stats { gap: 32px; }
+}
+@media (max-width: 540px) {
+  section { padding: 60px 0; }
+  .steps { grid-template-columns: 1fr; }
+}
+
+/* ── SCROLL ANIMATIONS ── */
+.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">
+      <div class="nav-logo-mark">RCM</div>
+      <div>
+        <div class="nav-logo-text">RCM Solutions Group</div>
+        <span class="nav-logo-sub">Revenue Cycle Advisory</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#how">Process</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Physician-Led Advisory
+      </div>
+      <h1>Stop Losing Revenue<br>to <span>Repeatable Denials</span></h1>
+      <p class="hero-desc">
+        We analyze your claims and denial data to identify recurring patterns, quantify financial impact, and give you a clear path to recovering lost reimbursement.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Request a Pilot Review</a>
+        <a href="#services" class="btn btn-outline">See How It Works</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-val">3–5</div>
+          <div class="stat-label">Days pilot turnaround</div>
+        </div>
+        <div>
+          <div class="stat-val">72%</div>
+          <div class="stat-label">Of denials from 3 root causes</div>
+        </div>
+        <div>
+          <div class="stat-val">SAR</div>
+          <div class="stat-label">Impact quantified per finding</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <div class="problem-grid fade-up">
+      <div class="problem-text">
+        <p class="section-label">The Problem</p>
+        <h2>The Same Denials Keep Coming Back</h2>
+        <p>Most healthcare providers have a billing team. The problem isn't the team — it's the absence of structured denial analysis between cycles.</p>
+        <p>Without it, the same documentation gaps, authorization errors, and coding mismatches repeat every month, silently draining revenue with no visibility on the true financial impact.</p>
+      </div>
+      <div class="problem-cards">
+        <div class="problem-card">
+          <div class="problem-card-label">Pattern 1</div>
+          <p>High rejection rates with no structured root-cause identification</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-label">Pattern 2</div>
+          <p>Same denial categories repeating month after month without correction</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-label">Pattern 3</div>
+          <p>No clear financial visibility — teams don't know how much is truly recoverable</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <p class="section-label fade-up">Our Services</p>
+    <h2 class="section-title fade-up">Three Clear Engagement Models</h2>
+    <p class="section-sub fade-up">Designed to deliver measurable value at every stage — from a first look to a continuous partnership.</p>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-num">01</div>
+        <div class="service-icon">🔍</div>
+        <h3>Pilot Engagement</h3>
+        <p>One-time review of a defined dataset. Identifies denial patterns, root causes, and financial impact. Delivered as a full Revenue Impact Assessment Report.</p>
+        <span class="service-tag">Entry Point · 3–5 Days</span>
+      </div>
+      <div class="service-card featured fade-up">
+        <div class="service-num">02</div>
+        <div class="service-icon">📊</div>
+        <h3>Monthly Retainer</h3>
+        <p>Ongoing claims review, denial trend tracking, and monthly reporting. Continuous identification of revenue leakage with actionable corrective frameworks.</p>
+        <span class="service-tag">Main Engagement · Recurring</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-num">03</div>
+        <div class="service-icon">⚡</div>
+        <h3>On-Demand Tasks</h3>
+        <p>Denial response batches, targeted analysis, or custom reporting. Flexible scope with volume-based pricing — no long-term commitment required.</p>
+        <span class="service-tag">Flexible · Per Task</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <p class="section-label fade-up">The Process</p>
+    <h2 class="section-title fade-up">Four Steps to Financial Clarity</h2>
+    <p class="section-sub fade-up">A structured process that turns raw claims data into clear, actionable findings.</p>
+    <div class="steps-line">
+      <div class="steps">
+        <div class="step fade-up">
+          <div class="step-num">1</div>
+          <h3>Data Submission</h3>
+          <p>Client provides claims data, denial reports, and supporting documentation via secure transfer.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-num">2</div>
+          <h3>Pattern Analysis</h3>
+          <p>We identify denial categories, map recurring patterns, and calculate the SAR impact behind each finding.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-num">3</div>
+          <h3>Report Delivery</h3>
+          <p>Structured Revenue Impact Assessment delivered with key findings, recovery opportunities, and corrective actions.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-num">4</div>
+          <h3>Ongoing Monitoring</h3>
+          <p>Monthly tracking ensures corrections are holding and new patterns are caught before they compound.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <p class="section-label fade-up">Pricing</p>
+    <h2 class="section-title fade-up">Transparent, Volume-Based Pricing</h2>
+    <p class="section-sub fade-up">Scaled to your claims volume. All pricing correlates directly with financial impact identified.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card fade-up">
+        <div class="pricing-name">Pilot Review</div>
+        <div class="pricing-price">
+          <div class="price-amount">Fixed</div>
+          <div class="price-note">Per engagement · defined scope</div>
+        </div>
+        <ul class="pricing-features">
+          <li>One-time dataset analysis</li>
+          <li>Revenue Impact Assessment Report</li>
+          <li>Root-cause mapping</li>
+          <li>Recovery opportunity identification</li>
+          <li>Corrective action framework</li>
+          <li>3–5 working day turnaround</li>
+        </ul>
+      </div>
+      <div class="pricing-card popular fade-up">
+        <div class="popular-badge">Most Popular</div>
+        <div class="pricing-name">Monthly Retainer</div>
+        <div class="pricing-price">
+          <div class="price-amount">3,000–12,000</div>
+          <div class="price-note">SAR / month · based on claims volume</div>
+        </div>
+        <ul class="pricing-features">
+          <li>Up to 500 claims: 3,000–4,000 SAR</li>
+          <li>500–1,500 claims: 5,000–7,000 SAR</li>
+          <li>1,500–3,000 claims: 8,000–12,000 SAR</li>
+          <li>3,000+ claims: Custom pricing</li>
+          <li>Monthly reporting & trend tracking</li>
+          <li>Strategic denial reduction support</li>
+        </ul>
+      </div>
+      <div class="pricing-card fade-up">
+        <div class="pricing-name">Project / On-Demand</div>
+        <div class="pricing-price">
+          <div class="price-amount">8–10 SAR</div>
+          <div class="price-note">Per claim · or 5,000–12,000 SAR batch</div>
+        </div>
+        <ul class="pricing-features">
+          <li>Per-claim audit pricing</li>
+          <li>Batch project 5–10 working days</li>
+          <li>Denial response preparation</li>
+          <li>Targeted analysis on request</li>
+          <li>No minimum commitment</li>
+          <li>Ideal for first-time clients</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <p class="section-label">About</p>
+        <h2>Physician-Led. Operationally Grounded.</h2>
+        <p>RCM Solutions Group was built from direct experience inside hospital systems and insurance environments in Saudi Arabia.</p>
+        <p>The difference between a generic billing audit and what we do is clinical context. We understand why a claim was built a certain way — which is exactly what's needed to identify why it was denied and how to prevent it from repeating.</p>
+        <ul class="cred-list">
+          <li>
+            <div class="cred-icon">🏥</div>
+            <div>Medical direction by a consultant in internal medicine, Ain Shams University</div>
+          </li>
+          <li>
+            <div class="cred-icon">🇸🇦</div>
+            <div>Based in the Eastern Province — direct experience with KSA payer workflows</div>
+          </li>
+          <li>
+            <div class="cred-icon">📋</div>
+            <div>Experience across hospital systems and insurance organizations including BUPA, TAWUNIYA, MEDGULF, and JHAH</div>
+          </li>
+        </ul>
+      </div>
+      <div class="about-visual fade-up">
+        <div class="about-visual-title">What We Identify</div>
+        <div class="metric">
+          <span class="metric-label">Missing Documentation</span>
+          <span class="metric-tag">Avg 33% of denials</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Pre-Authorization Issues</span>
+          <span class="metric-tag">Avg 27% of denials</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Coding Mismatches</span>
+          <span class="metric-tag">Avg 20% of denials</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Typical Addressable Value</span>
+          <span class="metric-value">39–46%</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Pilot Turnaround</span>
+          <span class="metric-value">3–5 days</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info fade-up">
+        <p class="section-label">Contact</p>
+        <h2>Start with a Pilot Review</h2>
+        <p>The fastest way to see value is to let us look at a real dataset. Send us a message and we'll define the scope and timeline within 24 hours.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉️</div>
+          <div><a href="mailto:rcmsolutionsg@gmail.com">rcmsolutionsg@gmail.com</a></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <div>Eastern Province, Saudi Arabia</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">⏱</div>
+          <div>Response within 24 hours</div>
+        </div>
+      </div>
+      <div class="contact-form fade-up">
+        <h3>Request a Pilot Engagement</h3>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-row">
+            <div class="field">
+              <label>Your Name</label>
+              <input type="text" name="name" placeholder="Full name" required>
+            </div>
+            <div class="field">
+              <label>Facility / Clinic Name</label>
+              <input type="text" name="facility" placeholder="Provider name" required>
+            </div>
+          </div>
+          <div class="field">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="field">
+            <label>Approximate Monthly Claims Volume</label>
+            <select name="volume">
+              <option value="">Select range</option>
+              <option>Under 500 claims/month</option>
+              <option>500 – 1,500 claims/month</option>
+              <option>1,500 – 3,000 claims/month</option>
+              <option>3,000+ claims/month</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Brief Description of Current Challenge</label>
+            <textarea name="message" placeholder="e.g. high rejection rate from BUPA, recurring pre-auth denials..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Request →</button>
+          <p class="form-note">Your data is confidential. We respond within 24 hours.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">RCM Solutions Group</div>
+    <div class="footer-sub">Physician-Led Revenue Cycle Advisory · Eastern Province, KSA</div>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-copy">© 2026 RCM Solutions Group · rcmsolutionsg@gmail.com</div>
+  </div>
+</footer>
+
+<script>
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
